@@ -6,7 +6,7 @@ const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button
+    <button 
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
        {theme === 'dark' ? <LightIcon/>: <DarkIcon/>} 
