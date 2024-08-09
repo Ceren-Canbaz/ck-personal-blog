@@ -1,5 +1,6 @@
 "use client"
 import { useTheme } from 'next-themes';
+import { LightIcon,DarkIcon } from './Icons';
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
@@ -8,7 +9,7 @@ const ThemeSwitcher = () => {
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      Switch to {theme === 'dark' ? 'light' : 'dark'} mode
+       {theme === 'dark' ? <LightIcon/>: <DarkIcon/>} 
     </button>
   );
 };
