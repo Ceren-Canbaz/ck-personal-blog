@@ -10,6 +10,7 @@ export const postType = defineType({
     defineField({
       name: 'title',
       type: 'string',
+      validation: (Rule) => Rule.required().min(5).max(100),
     }),
     defineField({
       name: 'slug',

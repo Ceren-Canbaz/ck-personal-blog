@@ -1,21 +1,21 @@
-import Link from "next/link"
-import { Lilita_One } from "next/font/google" 
+import Link from "next/link";
+import { Lilita_One } from "next/font/google";
 import { BackIcon } from './Icons';
 
-const font = Lilita_One({weight:"400",subsets :["latin"]})
-const CMSNavbar = () => {
-    return (
-    <div className='flex justify-between items-center py-1 px5'>
-      <Link href="/">
-      <BackIcon/>
-      </Link>
-   <Link href="/">
-   <div className={'${font.className} text-3xl dark:text-amber-50'}>
+const font = Lilita_One({ weight: "400", subsets: ["latin"] });
 
-   </div>
-    </Link>   
+const CMSNavbar = () => {
+  return (
+    <div className='flex items-center py-1 px-5'>
+      <Link href="/" className='flex items-center mr-4'>
+        <BackIcon />
+      </Link>
+
+      <div className={`${font.className} text-3xl dark:text-amber-50 text-white`}>
+        DevBlog
+      </div>
     </div>
-  )
+  );
 }
 
-export default CMSNavbar
+export default CMSNavbar;
