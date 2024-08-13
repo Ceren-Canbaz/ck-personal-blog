@@ -4,8 +4,8 @@ export interface Post{
     publishedAt:string;
     excerpt:string,
     body:any;///make interface too
-    category: Arrat<Category>
-    _id:String,
+    category: Array<Category>
+    _id:string,
 
 } 
 
