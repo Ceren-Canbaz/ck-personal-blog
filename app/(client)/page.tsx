@@ -3,9 +3,7 @@ import { client } from "@/sanity/lib/client";
 import Header from '../components/Header';
 import { Post } from "../utils/Interface";
 import PostComponent from "../components/PostComponent";
-import myPortableTextComponents from "../components/ImageCard";
-import { PortableText } from "@portabletext/react";
-import { urlForImage } from "@/sanity/lib/image";
+
 
 async function getPosts() {
   const query = `
