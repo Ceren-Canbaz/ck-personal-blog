@@ -1,8 +1,10 @@
 import Image from "next/image";
 import {client} from "@/sanity/lib/client"
 import Header from '../components/Header';
-import { Post } from "../utils/interface";
+import { Post } from "../utils/Interface";
 import PostComponent from "../components/PostComponent";
+import myPortableTextComponents from "../components/ImageCard";
+import { PortableText } from "@portabletext/react";
 
 async function getPosts() {
   const query = `
@@ -10,16 +12,23 @@ async function getPosts() {
   title,
   slug,
   publishedAt,
-  categories,
+  categories[]->{_id,slug,title},
+  excerpt,
+  mainImage {
+    asset -> {
+      _ref,
+      url
+    },
+    alt
+  },
   _id
-}
-  `;
+  }`;
   const data = await client.fetch(query);
   return data;
   
   
 }
-
+export const revalidate=60;
 export default async function Home() {
   const posts: Post[] = await getPosts();
   console.log(posts);
@@ -30,7 +39,10 @@ export default async function Home() {
       <div>
         {posts.length > 0 && posts.map((post) => (
           <PostComponent  key={post?._id} post={post} />
+          
+          
         ))}
+      
       </div>
     </div>
   );
