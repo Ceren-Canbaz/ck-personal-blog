@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link href="/" >
         <div className={'${font.className} text-3xl dark:text-amber-50'}>
           <span></span>
-            Dev Blog
+            
         </div>
         </Link>
         <div>

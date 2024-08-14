@@ -4,7 +4,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor, urlForImage } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import { Merriweather } from "next/font/google";
-import Link from "next/link"; // `Link` importu doğru
+import Link from "next/link";
 import React from "react";
 import Image from 'next/image';
 import myPortableTextComponents from "@/app/components/ImageCard";
@@ -49,14 +49,27 @@ const Page = async ({ params }: Params) => {
   const post: Post = await getPost(params.slug);
 
   return (
-    
-    <div>
+    <div className="max-w-3xl mx-auto px-4 py-8">
       <Header title={post.title} />
-      <div className="text-center">
+      <div className="text-center mb-6">
+        {/* Image */}
+        {urlForImage(post.mainImage).url() && (
+          <div className="relative w-full h-64 mb-6">
+            <Image
+              src={urlForImage(post.mainImage).url()}
+              alt={post.mainImage.alt || 'Post image'}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-md"
+            />
+          </div>
+        )}
+        {/* Date */}
         <span className={`${dateFont.className} text-sm text-gray-600 dark:text-gray-400 hover:text-pink-500 transition-colors`}>
           {new Date(post.publishedAt).toDateString()}
         </span>
-        <div className="mt-5 flex flex-wrap gap-2">
+        {/* Categories */}
+        <div className="mt-5 flex flex-wrap gap-2 justify-center">
           {post?.categories.map((category, index) => (
             <Link key={index} href={`/category/${category.slug.current}`}>
               <span className="inline-block px-3 py-1 text-sm font-medium text-gray-800 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 rounded-full">
@@ -66,24 +79,19 @@ const Page = async ({ params }: Params) => {
           ))}
         </div>
       </div>
-      <div className={richTextStyles}
-      >
-<PortableText
-      value={post.body}
-      components={myPortableTextComponents}
-      />
+      {/* Portable Text */}
+      <div className={richTextStyles}>
+        <PortableText
+          value={post.body}
+          components={myPortableTextComponents}
+        />
       </div>
-      
     </div>
   );
 }
 
 export default Page;
 
-
-  
-  
-  
 const richTextStyles = `
   mt-14
   text-justify
@@ -92,7 +100,6 @@ const richTextStyles = `
   prose-heading:text-2xl
   prose-p:mb-5
   prose-p:leading-7
-  m-auto
   prose-li:list-disc
   prose-li:leading-7
   prose-li:ml-4
